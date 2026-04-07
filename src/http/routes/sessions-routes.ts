@@ -12,7 +12,7 @@ export function sessionsRoutes(db: Knex): FastifyPluginAsync {
 
     app.post("/sessions", async (request, reply) => {
       const schema = z.object({
-        email: z.email(),
+        email: z.string().email(),
         password: z.string().min(6)
       });
 

@@ -11,7 +11,7 @@ export function usersRoutes(db: Knex): FastifyPluginAsync {
     app.post("/users", async (request, reply) => {
       const schema = z.object({
         name: z.string().min(1),
-        email: z.email(),
+        email: z.string().email(),
         password: z.string().min(6)
       });
 

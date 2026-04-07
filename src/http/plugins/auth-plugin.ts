@@ -17,7 +17,7 @@ const authPlugin: FastifyPluginAsync = async (app) => {
     }
   });
 
-  app.decorate("authenticate", async (request) => {
+  app.decorate("authenticate", async (request, _reply) => {
     try {
       await request.jwtVerify();
       request.currentUserId = request.user.id;

@@ -14,7 +14,7 @@ export function mealsRoutes(db: Knex): FastifyPluginAsync {
       const schema = z.object({
         name: z.string().min(1),
         description: z.string().nullable().optional(),
-        occurredAt: z.iso.datetime(),
+        occurredAt: z.string().datetime(),
         isOnDiet: z.boolean()
       });
 
@@ -42,7 +42,7 @@ export function mealsRoutes(db: Knex): FastifyPluginAsync {
     });
 
     app.get("/:id", async (request) => {
-      const paramsSchema = z.object({ id: z.uuid() });
+      const paramsSchema = z.object({ id: z.string().uuid() });
       const { id } = paramsSchema.parse(request.params);
 
       const meal = await mealsService.getById(id, request.currentUserId);
@@ -50,11 +50,11 @@ export function mealsRoutes(db: Knex): FastifyPluginAsync {
     });
 
     app.put("/:id", async (request, reply) => {
-      const paramsSchema = z.object({ id: z.uuid() });
+      const paramsSchema = z.object({ id: z.string().uuid() });
       const bodySchema = z.object({
         name: z.string().min(1),
         description: z.string().nullable().optional(),
-        occurredAt: z.iso.datetime(),
+        occurredAt: z.string().datetime(),
         isOnDiet: z.boolean()
       });
 
@@ -74,7 +74,7 @@ export function mealsRoutes(db: Knex): FastifyPluginAsync {
     });
 
     app.delete("/:id", async (request, reply) => {
-      const paramsSchema = z.object({ id: z.uuid() });
+      const paramsSchema = z.object({ id: z.string().uuid() });
       const { id } = paramsSchema.parse(request.params);
 
       await mealsService.delete({
