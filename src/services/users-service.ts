@@ -1,6 +1,9 @@
 import { AppError } from "../errors/app-error";
 import { comparePassword, hashPassword } from "../lib/password";
-import { type UserRecord, UsersRepository } from "../repositories/users-repository";
+import {
+  type UserRecord,
+  UsersRepository,
+} from "../repositories/users-repository";
 
 type CreateUserInput = {
   name: string;
@@ -27,7 +30,7 @@ export class UsersService {
     return this.usersRepository.create({
       name: input.name,
       email: input.email,
-      passwordHash
+      passwordHash,
     });
   }
 
@@ -37,7 +40,10 @@ export class UsersService {
       throw new AppError("Invalid credentials.", 401);
     }
 
-    const isPasswordValid = await comparePassword(input.password, user.password_hash);
+    const isPasswordValid = await comparePassword(
+      input.password,
+      user.password_hash,
+    );
     if (!isPasswordValid) {
       throw new AppError("Invalid credentials.", 401);
     }
