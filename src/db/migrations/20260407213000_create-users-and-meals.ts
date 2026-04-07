@@ -2,7 +2,7 @@ import type { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable("users", (table) => {
-    table.uuid("id").primary().defaultTo(knex.raw("(lower(hex(randomblob(16))))"));
+    table.string("id", 36).primary();
     table.string("name").notNullable();
     table.string("email").notNullable().unique();
     table.string("password_hash").notNullable();
@@ -11,9 +11,9 @@ export async function up(knex: Knex): Promise<void> {
   });
 
   await knex.schema.createTable("meals", (table) => {
-    table.uuid("id").primary().defaultTo(knex.raw("(lower(hex(randomblob(16))))"));
+    table.string("id", 36).primary();
     table
-      .uuid("user_id")
+      .string("user_id", 36)
       .notNullable()
       .references("id")
       .inTable("users")

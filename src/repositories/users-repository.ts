@@ -1,4 +1,5 @@
 import type { Knex } from "knex";
+import { randomUUID } from "node:crypto";
 
 export type UserRecord = {
   id: string;
@@ -25,6 +26,7 @@ export class UsersRepository {
   async create(input: CreateUserInput): Promise<UserRecord> {
     const [user] = await this.db<UserRecord>("users")
       .insert({
+        id: randomUUID(),
         name: input.name,
         email: input.email,
         password_hash: input.passwordHash

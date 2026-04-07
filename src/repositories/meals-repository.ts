@@ -1,4 +1,5 @@
 import type { Knex } from "knex";
+import { randomUUID } from "node:crypto";
 
 export type MealRecord = {
   id: string;
@@ -34,6 +35,7 @@ export class MealsRepository {
   async create(input: CreateMealInput): Promise<MealRecord> {
     const [meal] = await this.db<MealRecord>("meals")
       .insert({
+        id: randomUUID(),
         user_id: input.userId,
         name: input.name,
         description: input.description,
