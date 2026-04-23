@@ -4,8 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc -p tsconfig.json",
+    "dev:api": "tsx watch src/server.ts",
+    "dev:web": "next dev",
+    "build": "npm run build:api && npm run build:web",
+    "build:api": "tsc -p tsconfig.server.json",
+    "build:web": "next build",
     "start": "node dist/server.js",
+    "start:api": "node dist/server.js",
+    "start:web": "next start",
     "db:migrate": "tsx src/db/migrate.ts",
     "test": "vitest run"
   },
@@ -17,12 +23,18 @@
     "fastify": "^5.6.0",
     "fastify-plugin": "^5.1.0",
     "knex": "^3.1.0",
+    "lucide-react": "^1.9.0",
+    "next": "^16.2.4",
     "pg": "^8.16.3",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "sqlite3": "^5.1.7",
     "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/node": "^24.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"

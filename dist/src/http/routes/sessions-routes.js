@@ -31,5 +31,14 @@ function sessionsRoutes(db) {
                 }
             });
         });
+        app.delete("/sessions", async (_request, reply) => {
+            reply.clearCookie("token", {
+                path: "/",
+                httpOnly: true,
+                sameSite: "lax",
+                secure: env.NODE_ENV === "production"
+            });
+            return reply.status(204).send();
+        });
     };
 }

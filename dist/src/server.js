@@ -7,8 +7,9 @@ async function start() {
     const app = await (0, app_1.buildApp)();
     await app.listen({
         host: "0.0.0.0",
-        port: env.PORT
+        port: env.PORT,
     });
+    console.log(`Server running on port ${env.PORT}`);
 }
 start().catch((error) => {
     // eslint-disable-next-line no-console
