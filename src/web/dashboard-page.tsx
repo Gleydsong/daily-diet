@@ -212,7 +212,9 @@ export function DashboardPage() {
         <section className="dashboard-header" aria-labelledby="dashboard-title">
           <div className="dashboard-heading">
             <p className="eyebrow">Dashboard</p>
-            <h1 id="dashboard-title">Sua consistência alimentar.</h1>
+            <h1 id="dashboard-title">
+              Sua <em>consistência</em> alimentar.
+            </h1>
             <p className="muted">
               Registre, revise e acompanhe refeições dentro e fora da dieta com métricas calculadas pelo backend.
             </p>
@@ -231,19 +233,24 @@ export function DashboardPage() {
           <Metric title="Melhor sequência" value={metrics.bestOnDietStreak} icon={<Flame size={20} aria-hidden="true" />} />
         </section>
 
-        <section className="summary-panel" aria-label="Aderência à dieta" style={{ marginBottom: 18 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+        <section className="summary-panel adherence-panel" aria-label="Aderência à dieta">
+          <p className="eyebrow">Aderência</p>
+          <div className="adherence-header">
             <div>
-              <h2>{formatPercent(onDietRatio)} dentro da dieta</h2>
-              <p className="muted" style={{ marginBottom: 0 }}>
+              <h2>
+                <span className="adherence-value">{formatPercent(onDietRatio)}</span>{" "}
+                <em>dentro da dieta</em>
+              </h2>
+              <p className="muted">
                 Proporção baseada nas refeições cadastradas para sua conta.
               </p>
             </div>
-            <strong style={{ fontVariantNumeric: "tabular-nums", fontSize: "1.35rem" }}>
-              {metrics.totalOnDiet}/{metrics.totalMeals}
-            </strong>
+            <div className="adherence-ratio" aria-label={`${metrics.totalOnDiet} de ${metrics.totalMeals} refeições dentro da dieta`}>
+              <strong>{metrics.totalOnDiet}</strong>
+              <span>/{metrics.totalMeals}</span>
+            </div>
           </div>
-          <div className="progress-shell" aria-hidden="true" style={{ marginTop: 18 }}>
+          <div className="progress-shell" aria-hidden="true">
             <div className="progress-bar" style={{ width: `${Math.round(onDietRatio * 100)}%` }} />
           </div>
         </section>
@@ -368,14 +375,14 @@ export function DashboardPage() {
               <div className="meal-list">
                 {meals.map((meal) => (
                   <article className="meal-card" key={meal.id}>
-                    <div>
+                    <div className="meal-body">
                       <div className="meal-title">
                         <strong>{meal.name}</strong>
                         <span className={meal.is_on_diet ? "badge badge-success" : "badge badge-danger"}>
                           {meal.is_on_diet ? "Dentro da dieta" : "Fora da dieta"}
                         </span>
                       </div>
-                      <p className="muted" style={{ margin: "0 0 8px" }}>
+                      <p className="meal-description">
                         {meal.description || "Sem descrição informada."}
                       </p>
                       <div className="meal-meta">

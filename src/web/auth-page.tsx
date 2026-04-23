@@ -102,7 +102,9 @@ export function AuthPage() {
             <span>Daily Diet</span>
           </div>
 
-          <h1 id="daily-diet-title">Rotina alimentar com leitura clara do progresso.</h1>
+          <h1 id="daily-diet-title">
+            Rotina alimentar com leitura clara do <em>progresso</em>.
+          </h1>
           <p>
             Registre refeições, identifique consistência dentro da dieta e acompanhe sequências
             positivas sem depender de planilhas ou controles manuais.
@@ -130,7 +132,17 @@ export function AuthPage() {
 
       <section className="auth-card" aria-labelledby="auth-title">
         <p className="eyebrow">Acesso</p>
-        <h2 id="auth-title">{mode === "login" ? "Entre na sua rotina." : "Crie sua conta."}</h2>
+        <h2 id="auth-title">
+          {mode === "login" ? (
+            <>
+              Entre na sua <em>rotina</em>.
+            </>
+          ) : (
+            <>
+              Crie sua <em>conta</em>.
+            </>
+          )}
+        </h2>
         <p className="muted">
           {mode === "login"
             ? "Use seu e-mail e senha para continuar monitorando suas refeições."
